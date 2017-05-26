@@ -1,6 +1,8 @@
 package com.arturopacheco.miscontactos;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -37,10 +39,14 @@ public class SqlLiteHelper extends SQLiteOpenHelper{
 
     }
 
-    public void Insert(SQLiteDatabase db, String nombre,int telefono, String correo ){
-        db.execSQL(DATABASE_CREATE);
-        db.execSQL("insert into "+TABLE_NAME +"(nombre,telefono,email) values('"+nombre+"',"+telefono+",'"+correo+"')");
-    }
+    public void Insert(String nombre, String tel, String correo){
+            SQLiteDatabase db = null;
+            db.execSQL(DATABASE_CREATE);
+            db.execSQL("insert into " + TABLE_NAME + "(nombre,telefono,email) values('"+nombre+"','"+tel+"','"+correo+"')");
+        }
+        //nombre = (R.id.activity_detalles_contacto = nombre.charAt(nombre));
+
+
 
 
     //borra los registros (actualiza los datos)

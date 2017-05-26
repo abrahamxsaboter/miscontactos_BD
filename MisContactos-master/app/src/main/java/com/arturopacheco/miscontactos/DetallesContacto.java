@@ -4,11 +4,13 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DetallesContacto extends AppCompatActivity {
 
@@ -20,6 +22,16 @@ public class DetallesContacto extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles_contacto);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetallesContacto.this, MainActivity.class);
+                Toast.makeText(getBaseContext(),"Contacto Eliminado", Toast.LENGTH_LONG).show();
+                startActivity(intent);
+            }
+        });
 
         Bundle parametros = getIntent().getExtras();
         String nombre = parametros.getString("nombre");
