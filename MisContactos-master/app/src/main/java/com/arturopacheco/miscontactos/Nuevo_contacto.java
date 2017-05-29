@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class Nuevo_contacto extends AppCompatActivity  {
     TextInputEditText nombre, telefono,correo;
-    SqlLiteHelper sql;
+
     Button b1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,21 +29,28 @@ public class Nuevo_contacto extends AppCompatActivity  {
 
     }
     public void INSERTAR(View v) {
-        try {
+
             Intent evento;
             evento = new Intent(this, MainActivity.class);
 
             String nombre1 = nombre.getText().toString();
             String telefono1 = telefono.getText().toString();
             String correo1 = correo.getText().toString();
+            try {
+                                                       //Esta clase BaseDatos Puerto VersionSQL
+                SqlLiteHelper sql = new SqlLiteHelper ( this, "contacts.db", null, 1 );
+                SQLiteDatabase db = sql.getWritableDatabase (); // nos permite escribir dentro de la base de datos
 
+                db.execSQL ( "INSERT INTO contact (" +
+                        "nombre,telefono,email) VALUES ('" + nombre1 + "','" + telefono1 + "','" + correo1 + "')" );
+                db.close ();
+                Toast.makeText ( this, "Se ingreso correctamente el contacto", Toast.LENGTH_SHORT ).show ();
 
-            sql.Insert(nombre1, telefono1, correo1);
-            startActivity(evento);
-        } catch (Exception e) {
+                startActivity ( evento );
+            }catch (Exception e){
+                Toast.makeText ( this,e.getMessage ().toString (),Toast.LENGTH_SHORT ).show ();
+            }
 
-            Toast.makeText(this,e.getMessage().toString(),Toast.LENGTH_LONG).show();
-        }
     }
 
 

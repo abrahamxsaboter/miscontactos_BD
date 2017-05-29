@@ -23,30 +23,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(MainActivity.this, Nuevo_contacto.class);
-                    startActivity(intent);
-                }
-            });
-
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Nuevo_contacto.class);
+                startActivity(intent);
+            }
+        });
 
         dataSource = new ContactDataSource(this);
         dataSource.open();
         contactos = dataSource.GetContactos();
 
-        /*new ArrayList();
+        /*
         contactos.add(new Contacto("Benito","123456789","benito@email.com"));
         contactos.add(new Contacto("Mariana","123123","mariana@email.com"));
         contactos.add(new Contacto("Juan Perez","35435345","juan@email.com"));
-        contactos.add(new Contacto("Luis Lopez","54645645","luis@email.com"));*/
+        contactos.add(new Contacto("Luis Lopez","54645645","luis@email.com"));
+        */
+
         ArrayList<String> nombres = new ArrayList<String>();
 
-        for (Contacto contacto:contactos ) {
-            nombres.add(contacto.getNombre());
-
+        for(Contacto contacto:contactos) {
+            nombres.add(contacto.getNombre().toString());
         }
 
         ListView listViewContactos = (ListView) findViewById(R.id.listViewContactos);

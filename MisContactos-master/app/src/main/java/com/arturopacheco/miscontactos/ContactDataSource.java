@@ -18,12 +18,10 @@ public class ContactDataSource {
     private SQLiteDatabase database;
     private SqlLiteHelper dbHelper;
 
-
     public ContactDataSource(Context context) {
         dbHelper = new SqlLiteHelper(context);
     }
 
-    //abre la BD 1 ves
     public void open() throws SQLException{
         database = dbHelper.getWritableDatabase();
     }
@@ -45,7 +43,6 @@ public class ContactDataSource {
 
     public ArrayList<Contacto> GetContactos(){
         ArrayList<Contacto> contactos = new ArrayList<Contacto>();
-        //mapeo como arreglo
         Cursor cursor = database.query("contact",new String[]{"id","nombre","telefono","email"},null,null,null,null,null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
@@ -58,7 +55,6 @@ public class ContactDataSource {
 
     }
 
-    //mapeo
     private Contacto cursorToContact (Cursor cursor){
         Contacto contact = new Contacto(
                cursor.getString(1),

@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import static android.R.attr.name;
+import static android.R.attr.version;
+
 /**
  * Created by arturopacheco on 25/05/17.
  */
@@ -29,6 +32,11 @@ public class SqlLiteHelper extends SQLiteOpenHelper{
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    public SqlLiteHelper ( Context context, String s, Object o, int i ) {
+        super ( context, s, (SQLiteDatabase.CursorFactory) o, i );
+    }
+
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         //ejecuta la BD
@@ -38,17 +46,7 @@ public class SqlLiteHelper extends SQLiteOpenHelper{
                 +   "nombre,telefono,email) values('Juan Perez','5534334455','juan@perez.com')");
 
     }
-
-    public void Insert(String nombre, String tel, String correo){
-            SQLiteDatabase db = null;
-            db.execSQL(DATABASE_CREATE);
-            db.execSQL("insert into " + TABLE_NAME + "(nombre,telefono,email) values('"+nombre+"','"+tel+"','"+correo+"')");
-        }
-        //nombre = (R.id.activity_detalles_contacto = nombre.charAt(nombre));
-
-
-
-
+ 
     //borra los registros (actualiza los datos)
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
